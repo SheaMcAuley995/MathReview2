@@ -141,9 +141,9 @@ float dist(const vec3 & a, const vec3 & b)
 vec3 min(const vec3 & a, const vec3 & b)
 {
 	vec3 temp; 
-	temp.x = min(a.x, b.x);
-	temp.y = min(a.y, b.y);
-	temp.z = min(a.z, b.z);
+	temp.x = fmin(a.x, b.x);
+	temp.y = fmin(a.y, b.y);
+	temp.z = fmin(a.z, b.z);
 
 	
 	return vec3();
@@ -152,11 +152,21 @@ vec3 min(const vec3 & a, const vec3 & b)
 vec3 max(const vec3 & a, const vec3 & b)
 {
 	vec3 temp;
-	temp.x = max(a.x, b.x);
-	temp.y = max(a.y, b.y);
-	temp.z = max(a.z, b.z);
+	temp.x = fmax(a.x, b.x);
+	temp.y = fmax(a.y, b.y);
+	temp.z = fmax(a.z, b.z);
 
 	return temp;
+}
+
+vec3 clamp(const vec3 & min, const vec3 & v, const vec3 & max)
+{
+	vec3 dummy = v;
+
+	if (dummy.x < min.x) { dummy.x = min.x; }
+	if (dummy.x > max.x) { dummy.x = min.x; }
+
+
 }
 
 

@@ -30,4 +30,6 @@ void Player::update()
 void Player::draw()
 {
 	sfw::drawCircle(pos.x, pos.y, 15.f);
+
+
 }

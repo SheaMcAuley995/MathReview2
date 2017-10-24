@@ -6,7 +6,7 @@ class Player
 {
 public:
 	vec2 pos;
-
+	
 	void update();
 	void draw();
 };

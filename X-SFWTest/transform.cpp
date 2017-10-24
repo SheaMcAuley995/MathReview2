@@ -1,11 +1,11 @@
 #include "transform.h"
 #include "sfwdraw.h"
 
-Transform::Transform()
+Transform::Transform(vec2 a_pos, vec2 a_dim, float a_ang)
 {
-	position = vec2{ 0,0 };
-	dimension = vec2{ 0,0 };
-	angle = 0;
+	position = a_pos; //vec2{ 0,0 };
+	dimension = a_dim;//  vec2{ 0,0 };
+	angle = a_ang; // 0;
 	e_parent = nullptr;
 }
 
@@ -37,4 +37,11 @@ void DrawMatrix(const mat3 & t, float drawing_scale)
 	sfw::drawLine(pos.x, pos.y, up_ep.x, up_ep.y, GREEN);
 
 	sfw::drawCircle(pos.x, pos.y, drawing_scale / 4);
+
+}
+
+
+void DrawTexture(unsigned sprite, const mat3 &t)
+{
+	sfw::drawTextureMatrix3(sprite, 0, WHITE, t.m);
 }

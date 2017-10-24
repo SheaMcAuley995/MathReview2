@@ -41,3 +41,4 @@ void myGuy::draw(const mat3 & t)
 	sfw::drawCircle(pos.x, pos.y, 20, 12, RED);
 	DrawMatrix(myTrans.getGlobalTransform(), 1);
 }
+

@@ -1,6 +1,6 @@
 #include "sfwdraw.h"
 #include "transform.h"
-
+#include "Manager.h"
 #include "MyGuy.h"
 #include "mat3.h"
 
@@ -9,8 +9,16 @@
 #include <time.h>
 #include <cmath>
 
+
+
 int main()
 {
+	Manager Manage;
+	
+	vec2 RandomVec = { rand()%775+15,rand() % 575 + 15 };
+	int counter = 0;
+	bool clicked = false;
+	bool gather = false;
 	//sfw::initContext();
 	//int 15 = 1;
 	//myGuy me(10, 5, vec2{ 300, 400 }, vec2{ 25,25 }, 0);
@@ -79,9 +87,7 @@ int main()
 	//}
 	//sfw::termContext();
 	sfw::initContext();
-	srand(time(NULL));
 
-	vec2 pos;
 	vec2 pos2;
 	//vec2 movement = { 0,0 };
 	
@@ -100,28 +106,7 @@ int main()
 	//	e_parent = nullptr;
 	//}
 	
-	int randSpeed = rand() % 3 + 1;
-	int i = 0;
-	int Rx1 = rand() % 775 + 15;
-	int Ry1 = rand() & 575 + 15;
 
-	int Rx2 = rand() % 775 + 15;
-	int Ry2 = rand() & 575 + 15;
-
-	int Xv = Rx2 - Rx1;
-	int Yv = Ry2 - Ry1;
-
-	vec2 r1 = { Rx1, Ry1 };
-	vec2 r2 = { Rx2, Ry2 };
-
-	int counter = 0;
-	float circlespeed = 2;
-	pos.x = Rx1;
-	pos.y = Ry1;
-	pos2.x = Rx1;
-	pos2.y = Ry1;
-
-	vec2 Dir(norm(r2 - r1)*circlespeed);
 	while (sfw::stepContext())
 	{
 		/*	if (sfw::getMouseButton(0))
@@ -136,15 +121,10 @@ int main()
 				15 = 10;
 			}
 */
-
 		sfw::drawCircle(sfw::getMouseX(), sfw::getMouseY(), 15);
-		if (sfw::getMouseButton(0))
-		{
-				
-		}
-		
-		sfw::drawCircle(775, 575, 15, 12, RED);
-		sfw::drawCircle(0, 0, 15, 12, RED);
+
+		//sfw::drawCircle(775, 575, 15, 12, RED);
+		//sfw::drawCircle(0, 0, 15, 12, RED);
 		// player's position (third column is for translation)
 		vec2 target = me.myTrans.getGlobalTransform()[2].xy;
 
@@ -157,29 +137,60 @@ int main()
 		mat3 view = inverse(translate(target));
 		/*sfw::drawCircle(sfw::getMouseX(), sfw::getMouseY(), 15);*/
 		mat3 cam = proj * view;
-		
-		
-		/*sfw::drawCircle(pos.x, pos.y, 15, 12, RED);
-		pos += Dir;
-		sfw::drawCircle(pos2.x, pos2.y, 15, 12, RED);*/
-		/*pos2 = lerp(pos2, r2, sfw::getDeltaTime()/randSpeed);
-		counter += sfw::getDeltaTime();
-		counter++;
-		if (counter == 200)
+		if (sfw::getMouseButton(0))
 		{
-			randSpeed = rand() % 5 + 1;
-			r2 = { rand() % 600 + 1.f,rand() % 800 + 1.f };
-			counter = 0;
-		}*/
+
+			clicked = true;
+		}
+		if (gather == false && sfw::getMouseButton(1) && counter == 0)
+		{
+			counter = 10;
+			gather = true;
+			
+		}
+		else if (gather == true && sfw::getMouseButton(1) && counter == 0)
+		{
+			counter = 10;
+			RandomVec = { rand() % 775 + 15.f,rand() % 575 + 15.f };
+			gather = false;
+			
+		
+		}
+		
+		if (clicked == true && counter == 0)
+		{
+			counter = 10;
+				vec2 WhereIsTheMouse = { sfw::getMouseX(), sfw::getMouseY() };
+				RandomVec = { rand() % 775 + 15.f,rand() % 575 + 15.f };
+				Manage.MakeABaby(WhereIsTheMouse, RandomVec);
+
+		}
+		if (sfw::getMouseButton != (0))
+		{
+		
+			clicked = false;
+		}
+		if (gather == true)
+		{
+		
+			Manage.updateGatherAll();
+		}
+		if (gather == false)
+		{
+			Manage.updateAll();
+		}
+	
+		Manage.drawAll();
 	
 		unsigned sprite_ship = sfw::loadTextureMap("../resources/pixil-layer-Background.png");
 
 		DrawTexture(sprite_ship, cam * me.myTrans.getGlobalTransform());
 		me.update();
-		std::cout << counter << std::endl;
+		if (counter != 0)
+		{
+			counter--;
+		}
+	
 	}
 	sfw::termContext();
 }
-
-
-

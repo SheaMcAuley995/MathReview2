@@ -1,38 +1,26 @@
 #pragma once
-#include "mat3.h"
 #include "vec2.h"
-#include "Bubble.h"
+#include "mat3.h"
+#include "sfwdraw.h"
+#include <time.h>
+#include <random>
 
-
-class Manager
+class bubble
 {
 public:
 
-	bubble * findCirclePntr[256] = { nullptr };
-	void MakeABaby(vec2 spawn, vec2 target);
-	void updateAll();
-	void drawAll();
-	void updateGatherAll();
-
+	vec2 pos;
+	vec2 des;
+	int counter = 0;
+	float randSpeed = rand() % 6 + 3.f;
+	bubble(vec2 start, vec2 end);
+	
+	void gatherUpdate();
+	void update();
+	void draw();
 };
 
-
-
-//
-//class Manager
-//{
-//	int baseArray;
-//	int * findCirclePntr[256] = { nullptr };
-//
-//	void MakeABaby(vec2 spawn, vec2 target)
-//	{
-//		int c = 0;
-//		for (; findCirclePntr[c] != nullptr && c < 255; ++c);
-//		if (c == 255) return;
-//		findCirclePntr[c] = new Child(spawn, target);
-//
-//	}
-
+//void MakeBubble();
 
 
 //

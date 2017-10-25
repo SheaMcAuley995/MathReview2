@@ -1,10 +1,16 @@
 #include "Bubble.h"
-
-
+#include "transform.h"
 bubble::bubble(vec2 start, vec2 end)
 {
 	pos = start;
 	des = end;
+}
+
+void bubble::explodeUpdate()
+{
+	counter = 298;
+	des = { rand() % 775 + 15.f,rand() % 575 + 15.f };
+	pos = lerp(pos, des, sfw::getDeltaTime() * 5);
 }
 
 void bubble::gatherUpdate()
@@ -15,48 +21,31 @@ void bubble::gatherUpdate()
 	pos = lerp(pos, des, sfw::getDeltaTime() *2);
 }
 
+
 void bubble::update()
 {
-	if (counter <= 0)
+	pos = lerp(pos, des, sfw::getDeltaTime() / randSpeed);
+	if (counter > 200)
 	{
-		des.x += rand() % 300 - 150;
-		des.y += rand() % 300 - 150;
+		des.x += rand() % 100 - 50;
+		des.y += rand() % 100 - 50;
+		if (rand() % 100 + 1 == 50)
+		{
+			des = { rand() % 775 + 15.f,rand() % 575 + 15.f };
+		}
 		randSpeed = rand() % 6 + 3.f;
-		counter = 200;
+		counter = 0;
 	}
-	
-	if (des.x < 775 || des.x > 15 && des.y < 575 || des.y > 15)
-	{
-		pos = lerp(pos, des, sfw::getDeltaTime() / randSpeed);
-	}
-	if (des.x >= 775)
-	
-	counter--;
-	
-	
-	//	if (counter > 200)
-	//	{
-	//		
-	//	}
-	//	//counter = rand()%550+10;
-	//	//	if (counter >= 400 )
-	//	//	{
-	//	//		counter += rand() % 2;
-	//	//		//randSpeed = rand() % 6 + 3.f;
-	//	//		//counter = 200;
-	//	//		des = pos;
-	//	//	}
-	//	//	else
-	//	//	{
-	//	//		randSpeed = rand() % 6 + 3.f;
-	//	//		des = { rand() % 775 + 15.f,rand() % 575 + 15.f };
-	//	//	}
-	//	//}
-	//	counter++;
-	//}
+	counter+=rand()%2+1;
 }
 
 void bubble::draw()
 {
-		sfw::drawCircle(pos.x, pos.y, 5 , 4);
+	
+	sfw::drawTexture(sprite_ship, pos.x, pos.y,15.f,15.f);
+	//sfw::drawCircle(pos.x, pos.y, 5 , 4);
 }
+
+
+
+/*Find the area of the radius behind the player and have collsion with all other characters*/

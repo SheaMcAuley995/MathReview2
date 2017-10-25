@@ -136,6 +136,7 @@
     <ClInclude Include="Bubble.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="MyGuy.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

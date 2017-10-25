@@ -13,7 +13,7 @@ public:
 	void updateAll();
 	void drawAll();
 	void updateGatherAll();
-
+	void updateExplodeAll();
 };
 
 

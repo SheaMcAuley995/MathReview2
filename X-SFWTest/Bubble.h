@@ -4,6 +4,8 @@
 #include "sfwdraw.h"
 #include <time.h>
 #include <random>
+#include "transform.h"
+
 
 class bubble
 {
@@ -14,7 +16,8 @@ public:
 	int counter = 0;
 	float randSpeed = rand() % 6 + 3.f;
 	bubble(vec2 start, vec2 end);
-	
+	unsigned sprite_ship = sfw::loadTextureMap("../resources/pixil-layer-Background.png");
+	void explodeUpdate();
 	void gatherUpdate();
 	void update();
 	void draw();

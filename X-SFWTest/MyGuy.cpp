@@ -18,7 +18,7 @@ void myGuy::update(/*const mat3 & t*/)
 
 	if (sfw::getKey('W'))
 	{
-		myTrans.position += Dir;
+		
 	}
 	if (sfw::getKey('S'))
 	{

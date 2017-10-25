@@ -23,6 +23,13 @@
 				findCirclePntr[i]->gatherUpdate();
 	}
 
+	void Manager::updateExplodeAll()
+	{
+		for (int i = 0; i < 256; ++i)
+			if (findCirclePntr[i] != nullptr)
+				findCirclePntr[i]->explodeUpdate();
+	}
+
 	void Manager::drawAll()
 	{
 		for (int i = 0; i < 256; ++i)

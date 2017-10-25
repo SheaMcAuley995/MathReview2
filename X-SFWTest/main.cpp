@@ -21,20 +21,10 @@ int main()
 	bool gather = false;
 	//sfw::initContext();
 	//int 15 = 1;
-	//myGuy me(10, 5, vec2{ 300, 400 }, vec2{ 25,25 }, 0);
 
-	//Transform tran_background = { { 400,300 },{ 800,600 }, 0 }; //pos,dim,ang
-	//Transform army_guy =   { { 300, 400 }, { 25,25 }, 0 };
-	//Transform tran_tree1 = { { 200,300 },{ 100,100 }, 0 };
-	//Transform tran_tree2 = { { 400,500 },{ 72,72 }, 0 };
-	//Transform tran_tree3 = { { 700,200 },{ 72,72 }, 0 };
-	//Transform tran_tree4 = { { 100,100 },{ 72,72 }, 0 };
 
 	//
-	//unsigned sprite_background = sfw::loadTextureMap("../resources/back.jpg");
-	//unsigned sprite_tree = sfw::loadTextureMap("../resources/House.png");
-	//unsigned sprite_ship = sfw::loadTextureMap("../resources/pixil-layer-Background.png");
-	////unsigned army_guy = sfw::loadTextureMap("../resources/pixil-layer-Background.png");
+
 
 	//// adjust space so that screen center is 0,0 and dimensions are 250,250
 
@@ -65,20 +55,7 @@ int main()
 	//	{
 	//		15 = 10;
 	//	}
-	//	DrawTexture(sprite_background, cam * tran_background.getGlobalTransform());
-	//	DrawTexture(sprite_tree, cam * tran_tree1.getGlobalTransform());
-	//	//DrawTexture(army_guy, cam * army_guy.getGlobalTransform());
-	//	//DrawTexture(sprite_tree, cam * tran_tree2.getGlobalTransform());
-	//	//DrawTexture(sprite_tree, cam * tran_tree3.getGlobalTransform());
-	//	//DrawTexture(sprite_tree, cam * tran_tree4.getGlobalTransform());
-	//	sfw::drawCircle(sfw::getMouseX() + 25, sfw::getMouseY(), 15);
-	//	sfw::drawCircle(sfw::getMouseX() - 25, sfw::getMouseY(), 15);
-	//	sfw::drawCircle(sfw::getMouseX(), sfw::getMouseY() + 25, 15);
-	//	sfw::drawCircle(sfw::getMouseX(), sfw::getMouseY() - 25, 15);
-	//	sfw::drawCircle(sfw::getMouseX() + 25, sfw::getMouseY() + 25, 15);
-	//	sfw::drawCircle(sfw::getMouseX() - 25, sfw::getMouseY() + 25, 15);
-	//	sfw::drawCircle(sfw::getMouseX() - 25, sfw::getMouseY() - 25, 15);
-	//	sfw::drawCircle(sfw::getMouseX() + 25, sfw::getMouseY() - 25, 15);
+
 	//	DrawTexture(sprite_ship, cam * me.myTrans.getGlobalTransform());
 	//	
 	//	//DrawTexture(sprite_ship,);
@@ -121,7 +98,7 @@ int main()
 				15 = 10;
 			}
 */
-		sfw::drawCircle(sfw::getMouseX(), sfw::getMouseY(), 15);
+		sfw::drawCircle(sfw::getMouseX(), sfw::getMouseY(), 13);
 
 		//sfw::drawCircle(775, 575, 15, 12, RED);
 		//sfw::drawCircle(0, 0, 15, 12, RED);
@@ -137,6 +114,27 @@ int main()
 		mat3 view = inverse(translate(target));
 		/*sfw::drawCircle(sfw::getMouseX(), sfw::getMouseY(), 15);*/
 		mat3 cam = proj * view;
+
+		//unsigned sprite_background = sfw::loadTextureMap("../resources/back.jpg");
+		//unsigned sprite_tree = sfw::loadTextureMap("../resources/House.png");
+		//unsigned sprite_ship = sfw::loadTextureMap("../resources/pixil-layer-Background.png");
+		////unsigned army_guy = sfw::loadTextureMap("../resources/pixil-layer-Background.png");
+		////		unsigned sprite_ship = sfw::loadTextureMap("../resources/pixil-layer-Background.png");
+		////myGuy me(10, 5, vec2{ 300, 400 }, vec2{ 25,25 }, 0);
+
+		//Transform tran_background = { { 400,300 },{ 800,600 }, 0 }; //pos,dim,ang
+		//Transform army_guy = { { 300, 400 },{ 25,25 }, 0 };
+		//Transform tran_tree1 = { { 200,300 },{ 100,100 }, 0 };
+		//Transform tran_tree2 = { { 400,500 },{ 72,72 }, 0 };
+		//Transform tran_tree3 = { { 700,200 },{ 72,72 }, 0 };
+		//Transform tran_tree4 = { { 100,100 },{ 72,72 }, 0 };
+		//DrawTexture(sprite_background, cam * tran_background.getGlobalTransform());
+		//DrawTexture(sprite_tree, cam * tran_tree1.getGlobalTransform());
+		////DrawTexture(army_guy, cam * army_guy.getGlobalTransform());
+		//DrawTexture(sprite_tree, cam * tran_tree2.getGlobalTransform());
+		//DrawTexture(sprite_tree, cam * tran_tree3.getGlobalTransform());
+		//DrawTexture(sprite_tree, cam * tran_tree4.getGlobalTransform());
+	/*	DrawTexture(sprite_ship, cam * me.myTrans.getGlobalTransform());*/
 		if (sfw::getMouseButton(0))
 		{
 
@@ -159,7 +157,7 @@ int main()
 		
 		if (clicked == true && counter == 0)
 		{
-			counter = 10;
+			//counter = 10;
 				vec2 WhereIsTheMouse = { sfw::getMouseX(), sfw::getMouseY() };
 				RandomVec = { rand() % 775 + 15.f,rand() % 575 + 15.f };
 				Manage.MakeABaby(WhereIsTheMouse, RandomVec);
@@ -181,10 +179,9 @@ int main()
 		}
 	
 		Manage.drawAll();
-	
-		unsigned sprite_ship = sfw::loadTextureMap("../resources/pixil-layer-Background.png");
 
-		DrawTexture(sprite_ship, cam * me.myTrans.getGlobalTransform());
+
+
 		me.update();
 		if (counter != 0)
 		{

@@ -85,7 +85,7 @@ int main()
 	//	e_parent = nullptr;
 	//}
 	
-
+	
 	while (sfw::stepContext())
 	{
 		/*	if (sfw::getMouseButton(0))
@@ -145,6 +145,8 @@ int main()
 		if (gather == false && sfw::getMouseButton(1) && counter == 0)
 		{
 			counter = 10;
+			
+			
 			gather = true;
 			
 		}

@@ -19,9 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{213D0078-EAC3-4A5C-B73C-9D049E96EE5A}</ProjectGuid>
-    <RootNamespace>XSFWTest</RootNamespace>
+    <ProjectGuid>{47C2EABA-922A-4C0D-A946-E9D29915C557}</ProjectGuid>
+    <RootNamespace>XSFWTesting</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>X-SFWClassTesting</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -74,24 +75,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)dep\include\;$(SolutionDir)MathLib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)dep\lib\$(PlatformShortName)\$(Configuration);$(SolutionDir)$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfw.lib;MathLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)dep\include\;$(SolutionDir)MathLib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)dep\lib\$(PlatformShortName)\$(Configuration);$(SolutionDir)$(PlatformShortName)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfw.lib;MathLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -100,13 +91,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)dep\include\;$(SolutionDir)MathLib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)dep\lib\$(PlatformShortName)\$(Configuration);$(SolutionDir)$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfw.lib;MathLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -116,36 +104,22 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)dep\include\;$(SolutionDir)MathLib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)dep\lib\$(PlatformShortName)\$(Configuration);$(SolutionDir)$(PlatformShortName)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfw.lib;MathLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bubble.cpp" />
-    <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="DrawShape.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Manager.cpp" />
-    <ClCompile Include="MyGuy.cpp" />
-    <ClCompile Include="player.cpp" />
-    <ClCompile Include="transform.cpp" />
+    <ClInclude Include="..\X-SFWTest\Collider.h" />
+    <ClInclude Include="..\X-SFWTest\Controller.h" />
+    <ClInclude Include="..\X-SFWTest\DrawShape.h" />
+    <ClInclude Include="..\X-SFWTest\transform.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bubble.h" />
-    <ClInclude Include="Collider.h" />
-    <ClInclude Include="Controller.h" />
-    <ClInclude Include="DrawShape.h" />
-    <ClInclude Include="Manager.h" />
-    <ClInclude Include="MyGuy.h" />
-    <ClInclude Include="player.h" />
-    <ClInclude Include="Rigidbody.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="transform.h" />
+    <ClCompile Include="..\X-SFWTest\Collider.cpp" />
+    <ClCompile Include="..\X-SFWTest\DrawShape.cpp" />
+    <ClCompile Include="..\X-SFWTest\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -161,7 +161,7 @@ int main()
 		
 		if (clicked == true && counter == 0)
 		{
-			//counter = 10;
+			counter = 10;
 				vec2 WhereIsTheMouse = { sfw::getMouseX(), sfw::getMouseY() };
 				RandomVec = { rand() % 775 + 15.f,rand() % 575 + 15.f };
 				Manage.MakeABaby(WhereIsTheMouse, RandomVec);

@@ -1,3 +1,5 @@
+
+//Original RTS game
 #include "sfwdraw.h"
 #include "transform.h"
 #include "Manager.h"
@@ -56,7 +58,7 @@ int main()
 	//		15 = 10;
 	//	}
 
-	//	DrawTexture(sprite_ship, cam * me.myTrans.getGlobalTransform());
+	//DrawTexture(sprite_ship, cam * me.myTrans.getGlobalTransform());
 	//	
 	//	//DrawTexture(sprite_ship,);
 	//	me.update();
@@ -191,3 +193,87 @@ int main()
 	}
 	sfw::termContext();
 }
+
+
+
+
+
+
+
+
+
+
+
+//
+//
+//#include "sfwdraw.h"
+//#include "transform.h"
+//#include "Player.h"
+//#include "MyGuy.h"
+//#include "mat3.h"
+//#include "Rigidbody.h"
+//#include "shapes.h"
+//#include "DrawShape.h"
+//#include "Collision.h"
+//#include <cmath>
+//#include <string>
+//#include <cstring>
+//#include <cassert>
+//
+//
+//int main()
+//{
+//	sfw::initContext();
+//
+//	Transform transform;
+//	Rigidbody rigidbody;
+//	AABB aabb = { { 0,0 },{ 1,1 } };
+//	circle circ = { { 0,0 }, 1 };
+//	AABB box = { {400,300}, {10,10} };
+//	transform.position = vec2{ 400, 300 };
+//	transform.dimension = vec2{ 10,15 };
+//	circle circ2 = { {700,500},50 };
+//	bool jumped = false;
+//	while (sfw::stepContext())
+//	{
+//	    Collision result = intersect_AABB(transform.getGlobalTransform() * aabb, box);
+//		Collision result2 = intersect_circle(transform.getGlobalTransform() * circ, circ2);
+//		unsigned color = result.penetrationDepth < 0 ? RED : WHITE;
+//
+//		if (result2.penetrationDepth >= 0)
+//		{
+//			transform.position += result2.axis * result2.handedness * result2.penetrationDepth;
+//			//rigidbody.force -= rigidbody.velocity * 20;
+//			rigidbody.velocity = -rigidbody.velocity;
+//			
+//			//rigidbody.torque += -rigidbody.angularVelocity * 20;
+//		}
+//
+//
+//	/*	if (result2.penetrationDepth >= 0)
+//			transform.position += result.axis * result.handedness * result.penetrationDepth;*/
+//
+//		drawCircle(circ2);
+//		//drawbox(box, color);
+//		drawbox(transform.getGlobalTransform() * aabb, color);
+//		drawCircle(transform.getGlobalTransform() * circ);
+//		DrawMatrix(transform.getGlobalTransform(), 1);
+//
+//		float dt = sfw::getDeltaTime();
+//
+//		//rigidbody.force += { 0, -25 }; // gravity
+//
+//		// moving jets
+//
+//
+//		rigidbody.integrate(transform, dt);
+//	}
+//	sfw::termContext();
+//}
+//
+
+
+
+
+
+

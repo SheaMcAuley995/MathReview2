@@ -50,7 +50,11 @@ mat3 operator*(const mat3 & A, const mat3 & B)
 
 vec3 operator*(const mat3 & A, const vec3 & V)
 {
-	return vec3();
+	mat3 at = transpose(A);
+
+	return vec3{ dot(at[0], V),
+		dot(at[1], V),
+		dot(at[2], V) };
 }
 
 mat3 transpose(const mat3 & A)

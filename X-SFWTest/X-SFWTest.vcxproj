@@ -127,6 +127,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bubble.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="DrawShape.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="MyGuy.cpp" />
@@ -134,9 +136,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bubble.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="DrawShape.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="MyGuy.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="Rigidbody.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

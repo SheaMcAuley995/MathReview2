@@ -27,16 +27,22 @@ void bubble::update()
 	pos = lerp(pos, des, sfw::getDeltaTime() / randSpeed);
 	if (counter > 200)
 	{
-		des.x += rand() % 100 - 50;
-		des.y += rand() % 100 - 50;
-		if (rand() % 100 + 1 == 50)
-		{
-			des = { rand() % 775 + 15.f,rand() % 575 + 15.f };
-		}
-		randSpeed = rand() % 6 + 3.f;
+		des.x += rand() % 400 - 200;
+		des.y += rand() % 400 - 200;
+		//if (rand() % 100 + 1 == 50)
+		//{
+		//	des = { rand() % 775 + 15.f,rand() % 575 + 15.f };
+		//}
+		randSpeed = rand() % 20 + 10.f;
 		counter = 0;
 	}
 	counter+=rand()%2+1;
+	if (pos.x > 800 || pos.x < 0 || pos.y > 600 || pos.y < 0)
+	{
+		des.x += rand() % 400 - 200;
+		des.y += rand() % 400 - 200;
+		randSpeed = rand() % 20 + 10.f;
+	}
 }
 
 void bubble::draw()

@@ -174,6 +174,18 @@ vec3 cross(const vec3 &a, const vec3 & b)
 		         a.x*b.y - a.y*b.x };
 	
 }
+vec3 clamp(const vec3 & a_min, const vec3 & v, const vec3 & a_max)
+{
+	vec3 dummy = v;
+	//min {1,1,1};
+	//value {0,6,3};
+	//max {5,5,5};
+
+	dummy = min(dummy, a_max);
+	dummy = max(dummy, a_min);
+
+	return dummy;
+}
 //y
 
 

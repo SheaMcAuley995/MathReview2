@@ -10,7 +10,7 @@ public:
 	Transform *e_parent;
 
 
-	Transform(vec2 a_pos = { 0,0 }, vec2 a_dim = { 1,1 }, float a_ang = 0);
+	Transform(vec2 a_pos = { 0,0 }, vec2 a_dim = { 12,12 }, float a_ang = 0);
 
 	mat3 getLocalTransform() const;
 	mat3 getGlobalTransform() const;

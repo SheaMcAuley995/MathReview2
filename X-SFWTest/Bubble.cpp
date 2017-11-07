@@ -1,8 +1,9 @@
 #include "Bubble.h"
 #include "transform.h"
+
 bubble::bubble(vec2 start, vec2 end)
 {
-	pos = start;
+	trans.position = start;
 	des = end;
 }
 
@@ -10,7 +11,7 @@ void bubble::explodeUpdate()
 {
 	counter = 298;
 	des = { rand() % 775 + 15.f,rand() % 575 + 15.f };
-	pos = lerp(pos, des, sfw::getDeltaTime() * 5);
+	trans.position = lerp(trans.position, des, sfw::getDeltaTime() * 5);
 }
 
 void bubble::gatherUpdate()
@@ -18,14 +19,20 @@ void bubble::gatherUpdate()
 	counter = 298;
 	vec2 WhereIsTheMouse = { sfw::getMouseX(), sfw::getMouseY() };
 	des = WhereIsTheMouse;
-	pos = lerp(pos, des, sfw::getDeltaTime() *2);
+	trans.position = lerp(trans.position, des, sfw::getDeltaTime() *2);
 }
 
 
 void bubble::update()
-{
-	pos = lerp(pos, des, sfw::getDeltaTime() / 50);
-	if (counter > 5000)
+{	
+	
+	trans.position = lerp(trans.position, des, sfw::getDeltaTime() / 5);
+	if (counter >= 250 && counter < 300)
+	{
+		des.x = trans.position.x;
+		des.y = trans.position.x;
+	}
+	if (counter > 300)
 	{
 		des.x += rand() % 400 - 200;
 		des.y += rand() % 400 - 200;
@@ -38,20 +45,20 @@ void bubble::update()
 	}
 	counter+=rand()%2+1;
 
-		if(pos.x > 800)
+		if(trans.position.x > 800)
 			des.x -= rand() %200;
-		if (pos.x < 0)
+		if (trans.position.x < 0)
 			des.x += rand() %200;
-		if (pos.y > 600)
+		if (trans.position.y > 600)
 			des.y -= rand() %200;
-		if (pos.y < 0)
+		if (trans.position.y < 0)
 			des.y += rand() %200;
 }
 
 void bubble::draw()
 {
 	
-	sfw::drawTexture(sprite_ship, pos.x, pos.y,15.f,15.f);
+	sfw::drawTexture(sprite_ship, trans.position.x, trans.position.y,15.f,15.f);
 	//sfw::drawCircle(pos.x, pos.y, 5 , 4);
 }
 

@@ -128,6 +128,7 @@
   <ItemGroup>
     <ClCompile Include="Bubble.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DrawShape.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager.cpp" />

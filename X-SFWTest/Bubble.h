@@ -5,18 +5,22 @@
 #include <time.h>
 #include <random>
 #include "transform.h"
-
+#include "Rigidbody.h"
+#include "Collider.h"
 
 class bubble
 {
 public:
 
-	vec2 pos;
+	//vec2 pos;
+	Transform trans;
+	Rigidbody rigidbody;
 	vec2 des;
+	Collider collider;
 	int counter = 0;
 	float randSpeed = rand() % 6 + 3.f;
 	bubble(vec2 start, vec2 end);
-	unsigned sprite_ship = sfw::loadTextureMap("../resources/pixil-layer-Background.png");
+	unsigned sprite_ship = sfw::loadTextureMap("../resources/Army_guy.png");
 	void explodeUpdate();
 	void gatherUpdate();
 	void update();

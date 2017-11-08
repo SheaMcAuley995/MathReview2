@@ -22,13 +22,15 @@ int main()
 	int counter = 0;
 	bool clicked = false;
 	bool gather = false;
+	float barLeng = 15;
+	float barwidth = 15;
 	sfw::initContext();
 
 	vec2 pos2;
 	myGuy me(10, 5, vec2{ 300, 400 }, vec2{ 25,25 }, 0);
-
 	
-	Wall walls[5];
+	
+	Wall walls[6];
 
 	walls[0].transform.position = { 5,400 };
 	walls[0].transform.dimension = { 15,800 };
@@ -54,6 +56,14 @@ int main()
 	walls[4].transform.dimension = { 800,15 };
 	walls[4].collider.box.extents = { .5,.5 };
 	walls[4].sprite.handle = sfw::loadTextureMap("../resources/Army_guy.png");
+
+	for (int i = barLeng; barwidth != 0; --barwidth)
+	{
+		walls[5].transform.position = { 350,550 };
+		walls[5].transform.dimension = { barwidth,barLeng };
+	}
+
+
 	Manage.wall = walls;
 
 	while (sfw::stepContext())
@@ -107,7 +117,7 @@ int main()
 		
 		if (clicked == true && counter == 0)
 		{
-			//counter = 10;
+			counter = 10;
 				vec2 WhereIsTheMouse = { sfw::getMouseX(), sfw::getMouseY() };
 				//RandomVec = { rand() % 775 + 15.f,rand() % 575 + 15.f };
 				RandomVec = { 100,0 };

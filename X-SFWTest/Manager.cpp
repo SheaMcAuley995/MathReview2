@@ -64,19 +64,19 @@ bool doCollision(bubble & bubble, Ball & ball)
 	return false;
 }
 
-void doCollision(bubble * bub, bubble & bub2)
+void doCollision(bubble * bub, bubble * bub2)
 {
 	Collision hit = collides(bub->transform, bub->collider,
-		bub2.transform, bub2.collider);
+		bub2->transform, bub2->collider);
 
 	if (hit.penetrationDepth > 0)
 	{
 		dynamic_resolution(bub->transform.position,
 			bub->rigidbody.velocity,
 			bub->rigidbody.mass,
-			bub2.transform.position,
-			bub2.rigidbody.velocity,
-			bub2.rigidbody.mass,
+			bub2->transform.position,
+			bub2->rigidbody.velocity,
+			bub2->rigidbody.mass,
 			hit);
 	}
 }
@@ -85,16 +85,17 @@ void doCollision(bubble * bub, bubble & bub2)
 	{
 		
 		int c = 0;
-		for (; findCirclePntr[c] != nullptr && c < 255; ++c);
-		if (c == 255) return;
+		for (; findCirclePntr[c] != nullptr && c < bubblemax -1; ++c);
+		if (c == bubblemax -1) return;
 		{
 			findCirclePntr[c] = new bubble(spawn, target);
 
 			findCirclePntr[c]->sprite = sfw::loadTextureMap("../resources/Army_guy.png");
 			findCirclePntr[c]->rigidbody.drag = 0.001;
 			findCirclePntr[c]->transform.position = spawn;
-			findCirclePntr[c]->rigidbody.mass = rand() % 5 + 1;
-			findCirclePntr[c]->transform.dimension = vec2{ 15,15 };
+			findCirclePntr[c]->rigidbody.mass = rand() % 3 + 2;
+			findCirclePntr[c]->sprite.dim = { 2,2 };
+			findCirclePntr[c]->transform.dimension = vec2{ 17,20 };
 			findCirclePntr[c]->collider.box.extents = { .5, .5 };
 			findCirclePntr[c]->collider.box.position = { 0,0 };
 		}
@@ -103,7 +104,7 @@ void doCollision(bubble * bub, bubble & bub2)
 
 	void Manager::updateAll()
 	{
-		for (int i = 0; i < 256; ++i)
+		for (int i = 0; i < bubblemax; ++i)
 			if (findCirclePntr[i] != nullptr)
 			{
 				
@@ -113,16 +114,22 @@ void doCollision(bubble * bub, bubble & bub2)
 				{
 					doCollision(findCirclePntr[i], wall[j]);
 				}
-				//for (int k = 0; k < 256; ++k)
-				//{
-				//	doCollision(findCirclePntr[i], OtherBub[k]);
-				//}
+				for (int k = 1; k < bubblemax; ++k)
+				{
+					if (findCirclePntr[k] != nullptr)
+					{
+						if (i != k)
+						{
+							doCollision(findCirclePntr[i], findCirclePntr[k]);
+						}
+					}
+				}
 			}
 
 	}
 	void Manager::updateGatherAll()
 	{
-		for (int i = 0; i < 256; ++i)
+		for (int i = 0; i < bubblemax; ++i)
 			if (findCirclePntr[i] != nullptr)
 			{
 				findCirclePntr[i]->gatherUpdate();
@@ -130,19 +137,29 @@ void doCollision(bubble * bub, bubble & bub2)
 				{
 					doCollision(findCirclePntr[i], wall[j]);
 				}
+				for (int k = 1; k < bubblemax; ++k)
+				{
+					if (findCirclePntr[k] != nullptr)
+					{
+						if (i != k)
+						{
+							doCollision(findCirclePntr[i], findCirclePntr[k]);
+						}
+					}
+				}
 			}
 	}
 
 	void Manager::updateExplodeAll()
 	{
-		for (int i = 0; i < 256; ++i)
+		for (int i = 0; i < bubblemax; ++i)
 			if (findCirclePntr[i] != nullptr)
 				findCirclePntr[i]->explodeUpdate();
 	}
 
 	void Manager::drawAll()
 	{
-		for (int i = 0; i < 256; ++i)
+		for (int i = 0; i < bubblemax; ++i)
 			if (findCirclePntr[i] != nullptr)
 			{
 				drawbox(findCirclePntr[i]->collider.box, CYAN);

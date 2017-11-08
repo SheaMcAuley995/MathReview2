@@ -12,6 +12,7 @@ public:
 
 	Rigidbody rb;
 	Transform t;
+	int bubblemax = 25;
 	Wall * wall;
 	bubble * OtherBub;
 	bubble * findCirclePntr[256] = { nullptr };
@@ -23,11 +24,11 @@ public:
 	void updateGatherAll();
 	void updateExplodeAll();
 };
-void doCollision(bubble * bub, bubble & bub2);
+//void doCollision(bubble * bub, bubble & bub2);
 bool doCollision(bubble &bubble, const Wall &wall);
 bool doCollision(Ball &ball, const Wall &wall);
 bool doCollision(bubble &bubble, Ball &wall);
-bool doCollision(bubble * bub, bubble * bub2);
+void doCollision(bubble * bub, bubble * bub2);
 //
 //class Manager
 //{

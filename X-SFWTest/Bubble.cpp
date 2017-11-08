@@ -5,7 +5,11 @@
 void bubble::draw()
 {
 	sprite.draw(transform.position);
+	
+
+#ifdef _DEBUG
 	drawbox(collider.getGlobalBox(transform), RED);
+#endif
 	//sfw::drawTexture(sprite_ship, transform.position.x, transform.position.y);
 	//sfw::drawCircle(pos.x, pos.y, 5 , 4);
 }
@@ -34,11 +38,12 @@ void bubble::gatherUpdate()
 
 	vec2 mousePos = { sfw::getMouseX(),sfw::getMouseY() };
 	vec2 desiredVelocity = norm(mousePos - transform.position) * dist(mousePos, transform.position);
+
 	rigidbody.acceleration *  dist(mousePos, transform.position);
 	/*float desiredangle = atan2f(desiredVelocity.x,desiredVelocity.y);
 	transform.angle += (180/PI) * desiredangle;*/
-	rigidbody.force = desiredVelocity - rigidbody.velocity;
-	
+	rigidbody.force.x = (desiredVelocity.x - rigidbody.velocity.x) *10;
+	rigidbody.force.y = (desiredVelocity.y - rigidbody.velocity.y) *10;
 
 	//if(transform.position == WhereisMyMouse)
 	

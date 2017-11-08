@@ -163,5 +163,5 @@ vec2 reflect(const vec2 & v, const vec2 & axis)
 {
 	//vec2 displacement = project(v, axis) - v;
 
-	return 2 * project(v,axis);
+	return (2 * project(v,axis)) - v;
 }

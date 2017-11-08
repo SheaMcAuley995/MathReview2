@@ -5,7 +5,8 @@
 #include "Manager.h"
 #include "MyGuy.h"
 #include "mat3.h"
-#include "player.h"
+#include "DrawShape.h"
+#include "Bubble.h"
 #include <iostream>
 #include <random>
 #include <time.h>
@@ -16,7 +17,7 @@
 int main()
 {
 	Manager Manage;
-	
+	bubble bub();
 	vec2 RandomVec = { rand()%775+15,rand() % 575 + 15 };
 	int counter = 0;
 	bool clicked = false;
@@ -27,16 +28,45 @@ int main()
 	myGuy me(10, 5, vec2{ 300, 400 }, vec2{ 25,25 }, 0);
 
 	
-	Wall walls[2];
-	walls[0].transform.position = { 600,300 };
-	walls[0].transform.dimension = { 80,240 };
+	Wall walls[5];
+
+	walls[0].transform.position = { 5,400 };
+	walls[0].transform.dimension = { 15,800 };
 	walls[0].collider.box.extents = { .5,.5 };
-	walls[0].sprite.handle = sfw::loadTextureMap("../resources/Giant_Tree.png");
+	walls[0].sprite.handle = sfw::loadTextureMap("../resources/Army_guy.png");
+
+	walls[1].transform.position = { 400,0 };
+	walls[1].transform.dimension = { 800,15 };
+	walls[1].collider.box.extents = { .5,.5 };
+	walls[1].sprite.handle = sfw::loadTextureMap("../resources/Army_guy.png");
+
+	walls[2].transform.position = { 800,300 };
+	walls[2].transform.dimension = { 15,600 };
+	walls[2].collider.box.extents = { .5,.5 };
+	walls[2].sprite.handle = sfw::loadTextureMap("../resources/Army_guy.png");
+
+	walls[3].transform.position = { 600,400 };
+	walls[3].transform.dimension = { 400,15 };
+	walls[3].collider.box.extents = { .5,.5 };
+	walls[3].sprite.handle = sfw::loadTextureMap("../resources/Army_guy.png");
+
+	walls[4].transform.position = { 400,600 };
+	walls[4].transform.dimension = { 800,15 };
+	walls[4].collider.box.extents = { .5,.5 };
+	walls[4].sprite.handle = sfw::loadTextureMap("../resources/Army_guy.png");
+	Manage.wall = walls;
 
 	while (sfw::stepContext())
 	{
-
+		float dt = sfw::getDeltaTime();
 		sfw::drawCircle(sfw::getMouseX(), sfw::getMouseY(), 13);
+
+
+		//for (int i = 0; i < 4; ++i)
+			//walls[i].sprite.draw(walls[i].transform);
+
+
+
 
 		// player's position (third column is for translation)
 		vec2 target = me.myTrans.getGlobalTransform()[2].xy;
@@ -50,6 +80,8 @@ int main()
 		mat3 view = inverse(translate(target));
 
 		mat3 cam = proj * view;
+
+		
 
 		if (sfw::getMouseButton(0))
 		{
@@ -75,9 +107,10 @@ int main()
 		
 		if (clicked == true && counter == 0)
 		{
-			counter = 10;
+			//counter = 10;
 				vec2 WhereIsTheMouse = { sfw::getMouseX(), sfw::getMouseY() };
-				RandomVec = { rand() % 775 + 15.f,rand() % 575 + 15.f };
+				//RandomVec = { rand() % 775 + 15.f,rand() % 575 + 15.f };
+				RandomVec = { 100,0 };
 				Manage.MakeABaby(WhereIsTheMouse, RandomVec);
 
 		}
@@ -95,18 +128,23 @@ int main()
 		{
 			Manage.updateAll();
 		}
-	
-		Manage.drawAll();
 
-		for (int i = 0; i < 2; ++i)
-			walls[i].sprite.draw(walls[i].transform);
+
+	/*	for (int i = 0; i < 4; ++i)
+		{
+			doCollision(&Manage.findCirclePntr[0], walls[i]);
+		}*/
+
+		Manage.drawAll();
+		
 
 		me.update();
 		if (counter != 0)
 		{
 			counter--;
 		}
-	
+		for (int i = 0; i < 5; ++i)
+			drawbox(walls[i].collider.getGlobalBox(walls[i].transform), RED);
 	}
 	sfw::termContext();
 }

@@ -7,25 +7,51 @@
 #include "transform.h"
 #include "Rigidbody.h"
 #include "Collider.h"
+#include "Sprite.h"
+#include "DrawShape.h"
 
 class bubble
 {
 public:
-
-	//vec2 pos;
-	Transform trans;
-	Rigidbody rigidbody;
-	vec2 des;
-	Collider collider;
+	
+	Transform   transform;
+	Rigidbody   rigidbody;
+	Collider    collider;
+	Sprite sprite;
+	vec2 des = {0,0};
+	vec2 WhereisMyMouse = { sfw::getMouseX(), sfw::getMouseY() };
 	int counter = 0;
 	float randSpeed = rand() % 6 + 3.f;
-	bubble(vec2 start, vec2 end);
-	unsigned sprite_ship = sfw::loadTextureMap("../resources/Army_guy.png");
+
+	//unsigned sprite_ship = sfw::loadTextureMap("../resources/Army_guy.png");
 	void explodeUpdate();
 	void gatherUpdate();
+
 	void update();
+	//void update(Rigidbody &rb, Transform &t);
 	void draw();
+
+	bubble(vec2 start, vec2 end);
 };
+
+
+class Wall // static rigidbody
+{
+public:
+	Transform transform;
+	Collider collider;
+	Sprite sprite;
+};
+
+class Ball // dynamic rigidbody
+{
+public:
+	Transform transform;
+	Rigidbody rigidbody;
+	Collider collider;
+	Sprite sprite;
+};
+
 
 //void MakeBubble();
 

@@ -14,6 +14,7 @@ public:
 		force,
 		impulse;	   // continuous forces
 	float drag;
+	float gravity;
 
 	float angularVelocity,
 		angularAcceleration,
@@ -22,14 +23,15 @@ public:
 
 	Rigidbody() : velocity{ 0,0 },
 		acceleration{ 0,0 },
-		force{ 0,0 },
+		force{ 0,-10 },
 		impulse{ 0,0 },
-		mass(1),
-		drag(.25f),
+		mass(3),
+		drag(.05f),
 		angularVelocity(0),
 		angularAcceleration(0),
 		torque(0),
-		angularDrag(.25f)
+		angularDrag(.25f),
+		gravity(1000.908)//9.908
 	{
 
 	}

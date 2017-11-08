@@ -2,22 +2,32 @@
 #include "mat3.h"
 #include "vec2.h"
 #include "Bubble.h"
-
+#include "DrawShape.h"
+#include "Rigidbody.h"
+#include "transform.h"
 
 class Manager
 {
 public:
 
+	Rigidbody rb;
+	Transform t;
+	Wall * wall;
+	bubble * OtherBub;
 	bubble * findCirclePntr[256] = { nullptr };
+	vec2 WhereIsTheMouse = { sfw::getMouseX(), sfw::getMouseY() };
 	void MakeABaby(vec2 spawn, vec2 target);
 	void updateAll();
+	
 	void drawAll();
 	void updateGatherAll();
 	void updateExplodeAll();
 };
-
-
-
+void doCollision(bubble * bub, bubble & bub2);
+bool doCollision(bubble &bubble, const Wall &wall);
+bool doCollision(Ball &ball, const Wall &wall);
+bool doCollision(bubble &bubble, Ball &wall);
+bool doCollision(bubble * bub, bubble * bub2);
 //
 //class Manager
 //{

@@ -133,7 +133,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="MyGuy.cpp" />
-    <ClCompile Include="player.cpp" />
     <ClCompile Include="transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -143,7 +142,6 @@
     <ClInclude Include="DrawShape.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="MyGuy.h" />
-    <ClInclude Include="player.h" />
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="transform.h" />

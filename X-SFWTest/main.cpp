@@ -20,9 +20,11 @@ int main()
 	bubble bub();
 	vec2 RandomVec = { rand()%775+15,rand() % 575 + 15 };
 	int counter = 0;
+	int restcounter = 0;
 	bool clicked = false;
 	bool gather = false;
-	float barLeng = 15;
+	float barLeng = 156;
+	float barLengpos = 350;
 	float barwidth = 15;
 	sfw::initContext();
 
@@ -30,7 +32,7 @@ int main()
 	myGuy me(10, 5, vec2{ 300, 400 }, vec2{ 25,25 }, 0);
 	
 	
-	Wall walls[6];
+	Wall walls[15];
 
 	walls[0].transform.position = { 5,400 };
 	walls[0].transform.dimension = { 15,800 };
@@ -57,11 +59,30 @@ int main()
 	walls[4].collider.box.extents = { .5,.5 };
 	walls[4].sprite.handle = sfw::loadTextureMap("../resources/Army_guy.png");
 
-	for (int i = barLeng; barwidth != 0; --barwidth)
-	{
-		walls[5].transform.position = { 350,550 };
-		walls[5].transform.dimension = { barwidth,barLeng };
-	}
+	//for (int i = barLeng; barwidth != 0; --barwidth)
+	//{
+
+	walls[6].transform.position = { 350,550 };
+	walls[6].transform.dimension = { barLeng, barwidth };
+
+	walls[8].transform.position = { 65,15 };
+	walls[8].transform.dimension = { 15,800 };
+	walls[8].collider.box.extents = { .5,.5 };
+
+	walls[9].transform.position = { 400,600 };
+	walls[9].transform.dimension = { 800,15 };
+	walls[9].collider.box.extents = { .5,.5 };
+
+	walls[10].transform.position = { 400,600 };
+	walls[10].transform.dimension = { 800,15 };
+	walls[10].collider.box.extents = { .5,.5 };
+
+	walls[11].transform.position = { 400,600 };
+	walls[11].transform.dimension = { 800,15 };
+	walls[11].collider.box.extents = { .5,.5 };
+
+		
+	//}
 
 
 	Manage.wall = walls;
@@ -70,11 +91,12 @@ int main()
 	{
 		float dt = sfw::getDeltaTime();
 		sfw::drawCircle(sfw::getMouseX(), sfw::getMouseY(), 13);
-
+		walls[5].transform.position = { barLengpos,550 };
+		walls[5].transform.dimension = { barLeng, barwidth };
 
 		//for (int i = 0; i < 4; ++i)
 			//walls[i].sprite.draw(walls[i].transform);
-
+		
 
 
 
@@ -105,11 +127,12 @@ int main()
 			
 			gather = true;
 			
+			
 		}
 		else if (gather == true && sfw::getMouseButton(1) && counter == 0)
 		{
 			counter = 10;
-			RandomVec = { rand() % 775 + 15.f,rand() % 575 + 15.f };
+			
 			gather = false;
 			
 		
@@ -131,11 +154,28 @@ int main()
 		}
 		if (gather == true)
 		{
-		
+			if (barLeng > 0)
+			{
+				barLengpos-=2;
+				barLeng-=2;
+			}
+			if (barLeng <= 0)
+			{
+				//restcounter = 15;
+				gather = false;
+			}
+
+
 			Manage.updateGatherAll();
+
 		}
 		if (gather == false)
 		{
+			if (barLeng < 155)
+			{
+				barLengpos++;
+				barLeng++;
+			}
 			Manage.updateAll();
 		}
 
@@ -153,7 +193,7 @@ int main()
 		{
 			counter--;
 		}
-		for (int i = 0; i < 5; ++i)
+		for (int i = 0; i < 15; ++i)
 			drawbox(walls[i].collider.getGlobalBox(walls[i].transform), RED);
 	}
 	sfw::termContext();

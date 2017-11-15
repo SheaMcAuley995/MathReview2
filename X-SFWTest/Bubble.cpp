@@ -1,7 +1,7 @@
 #include "Bubble.h"
 #include "transform.h"
 
-#include <cmath>
+//#include <cmath>
 void bubble::draw()
 {
 	sprite.draw(transform.position);
@@ -24,29 +24,19 @@ void bubble::explodeUpdate()
 {
 	counter = 298;
 	des = { rand() % 775 + 15.f,rand() % 575 + 15.f };
-	/*transform.position = lerp(transform.position, des, sfw::getDeltaTime() * 5);*/
+
 }
 
 void bubble::gatherUpdate()
 {
-	
-	//rigidbody.force += norm(transform.getGlobalTransform()[1].xy) * 120;
-	
-	//transform.angle = dot(transform.position, WhereisMyMouse);
-
-	//transform.angle = (180/PI) * acos(dot(transform.position, WhereisMyMouse) / (mag(transform.position)* mag(WhereisMyMouse)));
 
 	vec2 mousePos = { sfw::getMouseX(),sfw::getMouseY() };
-	vec2 desiredVelocity = norm(mousePos - transform.position) * dist(mousePos, transform.position);
+	vec2 desiredVelocity = dist(mousePos, transform.position) * norm(mousePos - transform.position) ;
 
 	rigidbody.acceleration *  dist(mousePos, transform.position);
-	/*float desiredangle = atan2f(desiredVelocity.x,desiredVelocity.y);
-	transform.angle += (180/PI) * desiredangle;*/
-	rigidbody.force.x = (desiredVelocity.x - rigidbody.velocity.x) *10;
-	rigidbody.force.y = (desiredVelocity.y - rigidbody.velocity.y) *10;
-
-	//if(transform.position == WhereisMyMouse)
-	
+	//rigidbody.force = (desiredVelocity - rigidbody.velocity) * 10;
+	rigidbody.force.x = (desiredVelocity.x - rigidbody.velocity.x) *100;
+	rigidbody.force.y = (desiredVelocity.y - rigidbody.velocity.y) *100;
 	rigidbody.integrate(transform, sfw::getDeltaTime());
 
 }

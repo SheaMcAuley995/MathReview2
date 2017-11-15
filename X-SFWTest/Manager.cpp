@@ -1,5 +1,5 @@
 #include "Manager.h"
-
+#include <iostream>
 bool doCollision(bubble & bubble, const Wall & wall)
 {
 
@@ -14,6 +14,19 @@ bool doCollision(bubble & bubble, const Wall & wall)
 	return false;
 }
 
+bool doCollision(bubble & bubble, const Goal & goal)
+{
+
+	auto hit = collides(bubble.transform, bubble.collider,
+		goal.transform, goal.collider);
+
+	if (hit.penetrationDepth > 0)
+	{
+		//static_resolution(bubble.transform.position, bubble.rigidbody.velocity, hit, 1);
+		return true;
+	}
+	return false;
+}
 
 void doCollision(bubble * bubble, const Wall & wall)
 {
@@ -83,7 +96,8 @@ void doCollision(bubble * bub, bubble * bub2)
 
 	void Manager::MakeABaby(vec2 spawn, vec2 target)
 	{
-		
+		//float xJump = rand() % 50 + 25;
+		//float yJump = rand() % 550 + 200;
 		int c = 0;
 		for (; findCirclePntr[c] != nullptr && c < bubblemax -1; ++c);
 		if (c == bubblemax -1) return;
@@ -94,10 +108,11 @@ void doCollision(bubble * bub, bubble * bub2)
 			findCirclePntr[c]->rigidbody.drag = 0.001;
 			findCirclePntr[c]->transform.position = spawn;
 			findCirclePntr[c]->rigidbody.mass = rand() % 3 + 2;
-			findCirclePntr[c]->sprite.dim = { 2,2 };
-			findCirclePntr[c]->transform.dimension = vec2{ 17,20 };
+			findCirclePntr[c]->sprite.dim = { 1.5,1.5 };
+			findCirclePntr[c]->transform.dimension = vec2{ 12,15 };
 			findCirclePntr[c]->collider.box.extents = { .5, .5 };
 			findCirclePntr[c]->collider.box.position = { 0,0 };
+			//findCirclePntr[c]->rigidbody.force = {xJump,yJump };
 		}
 		
 	}
@@ -110,9 +125,10 @@ void doCollision(bubble * bub, bubble * bub2)
 				
 				findCirclePntr[i]->update();
 				//findCirclePntr[i]->collider.box.position = findCirclePntr[i]->transform.position;
-				for (int j = 0; j < 5; j++)
+				for (int j = 0; j < 25; j++)
 				{
-					doCollision(findCirclePntr[i], wall[j]);
+
+						doCollision(findCirclePntr[i], wall[j]);
 				}
 				for (int k = 1; k < bubblemax; ++k)
 				{
@@ -124,6 +140,16 @@ void doCollision(bubble * bub, bubble * bub2)
 						}
 					}
 				}
+				if (findCirclePntr[i] != nullptr)
+				{
+
+					if (doCollision(*findCirclePntr[i], goal) == true)
+					{
+						std::cout << "YAAAYYYYY SHEAAAAAA" << std::endl;
+					}
+				}
+				
+				
 			}
 
 	}
@@ -133,7 +159,7 @@ void doCollision(bubble * bub, bubble * bub2)
 			if (findCirclePntr[i] != nullptr)
 			{
 				findCirclePntr[i]->gatherUpdate();
-				for (int j = 0; j < 5; j++)
+				for (int j = 0; j < 25; j++)
 				{
 					doCollision(findCirclePntr[i], wall[j]);
 				}
@@ -162,9 +188,12 @@ void doCollision(bubble * bub, bubble * bub2)
 		for (int i = 0; i < bubblemax; ++i)
 			if (findCirclePntr[i] != nullptr)
 			{
+
 				drawbox(findCirclePntr[i]->collider.box, CYAN);
 				findCirclePntr[i]->draw();
 			}
+
+		//drawbox(g)
 	}
 	
 	

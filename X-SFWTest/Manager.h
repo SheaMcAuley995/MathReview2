@@ -12,9 +12,10 @@ public:
 
 	Rigidbody rb;
 	Transform t;
-	int bubblemax = 25;
+	int bubblemax = 5;
 	Wall * wall;
 	bubble * OtherBub;
+	Goal goal;
 	bubble * findCirclePntr[256] = { nullptr };
 	vec2 WhereIsTheMouse = { sfw::getMouseX(), sfw::getMouseY() };
 	void MakeABaby(vec2 spawn, vec2 target);
@@ -29,6 +30,7 @@ bool doCollision(bubble &bubble, const Wall &wall);
 bool doCollision(Ball &ball, const Wall &wall);
 bool doCollision(bubble &bubble, Ball &wall);
 void doCollision(bubble * bub, bubble * bub2);
+bool doCollision(bubble & bubble, const Goal & goal);
 //
 //class Manager
 //{

@@ -43,6 +43,14 @@ public:
 	Sprite sprite;
 };
 
+class Goal // static rigidbody
+{
+public:
+	Transform transform;
+	Collider collider;
+	Sprite sprite;
+};
+
 class Ball // dynamic rigidbody
 {
 public:
@@ -52,6 +60,8 @@ public:
 	Sprite sprite;
 };
 
+
+//Ball *ball;
 
 //void MakeBubble();
 
